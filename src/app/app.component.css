@@ -39,16 +39,24 @@
   }
 }
 
-.media-content {
-  overflow: hidden;
+
+
+.button-container{
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 50px 20px;
 }
 
-#wrapper{
-  width:100%;
-
-
+.custom-message-header {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7px;
+  transition: all .3s ease;
 }
 
-div{
-  text-align:center;
-}
