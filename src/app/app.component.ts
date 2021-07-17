@@ -7,6 +7,7 @@ import { RangerOne, RangerTwo} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  startOrContinue: string = "Start Fight"
   theWinner: string = ""
   rangerOne : any = {power:0}
   rangerTwo : any = {power: 0}
@@ -56,15 +57,26 @@ export class AppComponent {
 
     setTimeout(()=>
     {this.isStarted = false
-      this.toResetGame = false},3000)
+      this.toResetGame = false
+      this.startOrContinue = "Continue Fight"
+      if(this.rangerOne.power > this.rangerTwo.power){
+        this.theWinner = this.rangerOne.name
+      }
+      else{
+        this.theWinner = this.rangerTwo.name
+
+      }
+    },3000)
 
   }
   onPlayAgain(){
+    this.startOrContinue = "Start Fight"
     this.isStarted = false
     this.rangerOne = {}
     this.rangerTwo = {}
     this.isGeneratedOne = false
     this.isGeneratedTwo = false
+    this.theWinner = ""
   }
 
 }
