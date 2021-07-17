@@ -98,9 +98,17 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://noubarkalost.github.io/Ranger-Fight-Game/",
+            "name": "Ranger-Fight-Game",
+            "email": "noubar.kaloust@gmail.com"
+          }
         }
       }
     }
   },
-  "defaultProject": "Rangers"
+  "defaultProject": "cards"
 }
