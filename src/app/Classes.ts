@@ -8,8 +8,9 @@ export class Ranger implements IRanger {
   power: number = 0
   intervalId: number | undefined;
 
-  constructor() {
-
+  constructor(name: string, power: number) {
+    this.name = name
+    this.power = power
   }
 
   printName() {
@@ -32,12 +33,8 @@ export class Ranger implements IRanger {
 }
 
 export class RangerOne extends Ranger{
-  name: string
-  power: number
-  constructor(name:string,power: number) {
-    super();
-    this.power = power || 100
-    this.name = name
+    constructor(name:string,power: number) {
+    super(name,power);
   }
  startFight(num: number) {
    super.startFight(num || 20);
@@ -47,8 +44,7 @@ export class RangerOne extends Ranger{
 export class RangerTwo extends RangerOne{
   constructor(name: string,power: number = 100) {
     super(name,power);
-    this.power = power || 100
-    this.name = name
+
   }
 
 }

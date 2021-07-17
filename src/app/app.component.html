@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="columns is-full is-offset-1 is-center">
+
+  <div id="wrapper">
     <button class="button is-danger is-rounded " (click)="onHandleGenRangerOne()">Ranger One</button>
     <button  class="button is-info is-rounded" (click)="onHandleGenRangerTwo()">Ranger Two</button>
     <button class="button is-primary is-rounded "  [disabled]=" !(isGeneratedTwo && isGeneratedOne) || isStarted" (click)="onHandleStartFight()">Start Fight</button>
@@ -7,7 +7,7 @@
     <button class="button is-rounded is-black" [disabled]="toResetGame" (click)="onPlayAgain()">Play Again</button>
   </div>
 
-</div>
+
 
 
 <div class="container">
