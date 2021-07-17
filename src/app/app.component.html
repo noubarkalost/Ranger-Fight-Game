@@ -3,11 +3,9 @@
     <button class="button is-danger is-rounded " (click)="onHandleGenRangerOne()">Ranger One</button>
     <button  class="button is-info is-rounded" (click)="onHandleGenRangerTwo()">Ranger Two</button>
     <button class="button is-primary is-rounded "  [disabled]=" !(isGeneratedTwo && isGeneratedOne) || isStarted" (click)="onHandleStartFight()">Start Fight</button>
-    <button class="button is-rounded is-warning" (click)="onHandleStop()">Stop Fight</button>
+    <button class="button is-rounded is-warning"  [disabled]="!(isGeneratedTwo && isGeneratedOne) || !isStarted" (click)="onHandleStop()">Stop Fight</button>
     <button class="button is-rounded is-black" [disabled]="toResetGame" (click)="onPlayAgain()">Play Again</button>
   </div>
-
-
 
 
 <div class="container">
@@ -43,16 +41,16 @@
   </div>
 </div>
 
-<div class="notification is-primary" [hidden]="!(isStarted)">
-     <div [ngSwitch]="rangerTwo.power">
-  <div *ngSwitchCase="0">
-   The Winner Is <strong>{{rangerOne.name}}</strong>
-  </div>
-     </div>
-  <div [ngSwitch]="rangerOne.power">
-  <div *ngSwitchCase="0">
-  The Winner Is <strong>{{rangerTwo.name}}</strong>
+
+<div class="notification is-primary score" *ngIf="rangerTwo.power || rangerOne.power">
+
+
+    <p>The Winner Is <strong>{{theWinner}}</strong></p>
+
+
+
 </div>
-</div>
-</div>
+
+
+
 

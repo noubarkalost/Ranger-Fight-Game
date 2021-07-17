@@ -7,6 +7,7 @@ import { RangerOne, RangerTwo} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  theWinner: string = ""
   rangerOne : any = {power:0}
   rangerTwo : any = {power: 0}
   timerID : any = 0
@@ -35,10 +36,11 @@ export class AppComponent {
       this.rangerOne.startFight(20)
       if(!this.rangerOne.power) {
         clearInterval(this.timerID)
+        this.theWinner = this.rangerTwo.name
       }
       if(!this.rangerTwo.power) {
         this.toResetGame = false
-        console.log("you can play again" , this.toResetGame)
+        this.theWinner = this.rangerOne.name
         clearInterval(this.timerID)
 
        }

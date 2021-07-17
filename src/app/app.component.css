@@ -60,3 +60,7 @@
   transition: all .3s ease;
 }
 
+.score{
+  justify-content: center;
+  display: flex;
+}
