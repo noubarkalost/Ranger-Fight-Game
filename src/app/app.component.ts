@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Ranger} from "./Classes";
+import {Ranger, RangerOne, RangerTwo} from "./Classes";
 
 @Component({
   selector: 'app-root',
@@ -11,24 +11,22 @@ export class AppComponent {
   rangerTwo : any = {}
   timerID : any = 0
   onHandleGenRangerOne(){
-    const ranger = new Ranger("noubar")
+    const ranger = new RangerOne("Noubar", 100)
     this.rangerOne = ranger
     ranger.printName()
   }
   onHandleGenRangerTwo(){
-    const ranger = new Ranger("sako")
+    const ranger = new RangerTwo("Sako", 100)
     this.rangerTwo = ranger
     ranger.printName()
   }
   onHandleStartFight(){
 
-    this.rangerTwo.startFight()
-    this.rangerOne.startFight()
+    this.rangerTwo.startFight(5)
+    this.rangerOne.startFight(4)
     this.timerID = setInterval(() => {
-
-
       this.rangerTwo.startFight()
-      this.rangerOne.startFight()
+      this.rangerOne.startFight(20)
       if(!this.rangerOne.power) {
         clearInterval(this.timerID)
       }
