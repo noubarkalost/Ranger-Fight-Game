@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Ranger} from "./Classes";
+import { RangerOne, RangerTwo} from "./Classes";
 
 @Component({
   selector: 'app-root',
@@ -7,54 +7,76 @@ import {Ranger} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  rangerOne : any = {}
-  rangerTwo : any = {}
+  startOrContinue: string = "Start Fight"
+  theWinner: string = ""
+  rangerOne : any = {power:0}
+  rangerTwo : any = {power: 0}
   timerID : any = 0
+  isStarted: boolean = false
+  isGeneratedOne: boolean = false
+  isGeneratedTwo: boolean = false
+  toResetGame : boolean = true
   onHandleGenRangerOne(){
-    const ranger = new Ranger("noubar")
+    const ranger = new RangerOne("Noubar", 100)
     this.rangerOne = ranger
     ranger.printName()
+    this.isGeneratedOne = true
   }
   onHandleGenRangerTwo(){
-    const ranger = new Ranger("sako")
+    const ranger = new RangerTwo("Sako", 100)
     this.rangerTwo = ranger
     ranger.printName()
+    this.isGeneratedTwo = true
   }
   onHandleStartFight(){
-
-    this.rangerTwo.startFight()
-    this.rangerOne.startFight()
+    this.isStarted = true
+    this.rangerTwo.startFight(5)
+    this.rangerOne.startFight(4)
     this.timerID = setInterval(() => {
-
-
       this.rangerTwo.startFight()
-      this.rangerOne.startFight()
+      this.rangerOne.startFight(20)
       if(!this.rangerOne.power) {
         clearInterval(this.timerID)
+        this.theWinner = this.rangerTwo.name
       }
       if(!this.rangerTwo.power) {
-
-
+        this.toResetGame = false
+        this.theWinner = this.rangerOne.name
         clearInterval(this.timerID)
-      }
+
+       }
       console.log(`The Ranger  ${this.rangerOne.name}'s Power is  ${this.rangerOne.power}`)
       console.log(`The Ranger  ${this.rangerTwo.name}'s Power is  ${this.rangerTwo.power}`)
-      if(parseInt(this.rangerTwo.power ) === 0){
-        alert(this.rangerOne.name + "wins")
-      }
-      else if(parseInt(this.rangerOne.power ) === 0){
-        alert(this.rangerTwo.name + "wins")
-      }else if(parseInt(this.rangerTwo.power ) === 0 && parseInt(this.rangerOne.power ) === 0 ) {
-        alert('Draw')
-      }
+
     }, 1000)
-
-
-
 
   }
   onHandleStop() {
     this.rangerOne.onStop(this.timerID)
     this.rangerTwo.onStop(this.timerID)
+
+    setTimeout(()=>
+    {this.isStarted = false
+      this.toResetGame = false
+      this.startOrContinue = "Continue Fight"
+      if(this.rangerOne.power > this.rangerTwo.power){
+        this.theWinner = this.rangerOne.name
+      }
+      else{
+        this.theWinner = this.rangerTwo.name
+
+      }
+    },3000)
+
   }
+  onPlayAgain(){
+    this.startOrContinue = "Start Fight"
+    this.isStarted = false
+    this.rangerOne = {}
+    this.rangerTwo = {}
+    this.isGeneratedOne = false
+    this.isGeneratedTwo = false
+    this.theWinner = ""
+  }
+
 }
