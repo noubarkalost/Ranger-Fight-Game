@@ -1,0 +1,44 @@
+.container{
+  display: flex ;
+  flex-wrap: wrap;
+  padding: 50px 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+}
+
+.card-container {
+  width: 30%;
+  transform: scaleX(1);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.card-container:hover {
+  transform: scaleX(1.02);
+}
+
+.text {
+  text-decoration: none;
+  transition: all .3s linear;
+}
+
+
+@media only screen and (max-width: 1330px) {
+  .card-container {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+}
+
+
+@media only screen and (max-width: 740px) {
+  .card-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.media-content {
+  overflow: hidden;
+}

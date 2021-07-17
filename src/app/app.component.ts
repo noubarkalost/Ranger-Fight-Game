@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Ranger, RangerOne, RangerTwo} from "./Classes";
+import { RangerOne, RangerTwo} from "./Classes";
 
 @Component({
   selector: 'app-root',
@@ -7,21 +7,27 @@ import {Ranger, RangerOne, RangerTwo} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  rangerOne : any = {}
-  rangerTwo : any = {}
+  rangerOne : any = {power:0}
+  rangerTwo : any = {power: 0}
   timerID : any = 0
+  isStarted: boolean = false
+  isGeneratedOne: boolean = false
+  isGeneratedTwo: boolean = false
+  toResetGame : boolean = true
   onHandleGenRangerOne(){
     const ranger = new RangerOne("Noubar", 100)
     this.rangerOne = ranger
     ranger.printName()
+    this.isGeneratedOne = true
   }
   onHandleGenRangerTwo(){
     const ranger = new RangerTwo("Sako", 100)
     this.rangerTwo = ranger
     ranger.printName()
+    this.isGeneratedTwo = true
   }
   onHandleStartFight(){
-
+    this.isStarted = true
     this.rangerTwo.startFight(5)
     this.rangerOne.startFight(4)
     this.timerID = setInterval(() => {
@@ -31,28 +37,32 @@ export class AppComponent {
         clearInterval(this.timerID)
       }
       if(!this.rangerTwo.power) {
-
-
+        this.toResetGame = false
+        console.log("you can play again" , this.toResetGame)
         clearInterval(this.timerID)
-      }
+
+       }
       console.log(`The Ranger  ${this.rangerOne.name}'s Power is  ${this.rangerOne.power}`)
       console.log(`The Ranger  ${this.rangerTwo.name}'s Power is  ${this.rangerTwo.power}`)
-      if(parseInt(this.rangerTwo.power ) === 0){
-        alert(this.rangerOne.name + "wins")
-      }
-      else if(parseInt(this.rangerOne.power ) === 0){
-        alert(this.rangerTwo.name + "wins")
-      }else if(parseInt(this.rangerTwo.power ) === 0 && parseInt(this.rangerOne.power ) === 0 ) {
-        alert('Draw')
-      }
+
     }, 1000)
-
-
-
 
   }
   onHandleStop() {
     this.rangerOne.onStop(this.timerID)
     this.rangerTwo.onStop(this.timerID)
+
+    setTimeout(()=>
+    {this.isStarted = false
+      this.toResetGame = false},3000)
+
   }
+  onPlayAgain(){
+    this.isStarted = false
+    this.rangerOne = {}
+    this.rangerTwo = {}
+    this.isGeneratedOne = false
+    this.isGeneratedTwo = false
+  }
+
 }

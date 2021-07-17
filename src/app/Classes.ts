@@ -45,4 +45,10 @@ export class RangerOne extends Ranger{
 
 }
 export class RangerTwo extends RangerOne{
+  constructor(name: string,power: number = 100) {
+    super(name,power);
+    this.power = power || 100
+    this.name = name
+  }
+
 }
