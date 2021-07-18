@@ -18,6 +18,8 @@ export class AppComponent {
   isGeneratedOne: boolean = false
   isGeneratedTwo: boolean = false
   toResetGame: boolean = true
+  imageOne: string = "./assets/Red.jpg"
+  imageTwo: string = "./assets/Blue.jpg"
 
   onHandleGenRangerOne() {
     const ranger: IRanger = new RangerOne("Noubar", 100)
@@ -50,6 +52,7 @@ export class AppComponent {
       this?.rangerTwo?.startFight(20)
       this?.rangerOne?.startFight(20)
       if (!this?.rangerOne?.power) {
+        this.imageOne = "./assets/RedDead.gif"
         this.toResetGame = false
         this.isStarted = false
         clearInterval(this.timerID)
@@ -58,6 +61,7 @@ export class AppComponent {
         this.isGeneratedOne = false
         this.startOrContinue = "Start Fight"
       } else if (!this?.rangerTwo?.power) {
+        this.imageTwo = "./assets/BlueDead.gif"
         this.isStarted = false
         this.toResetGame = false
         this.theWinner = "The Winner Is: " + this.rangerOne.name + " ! .. Please Generate Players To Play Again Or Reset The Game"
@@ -106,6 +110,8 @@ export class AppComponent {
       this.rangerTwo = undefined
       this.isGeneratedOne = false
       this.isGeneratedTwo = false
+      this.imageOne = "./assets/Red.jpg"
+      this.imageTwo = "./assets/Blue.jpg"
       this.theWinner = "The Result Will Appear Here, Generate Players To Start"
     }, 3000)
 
