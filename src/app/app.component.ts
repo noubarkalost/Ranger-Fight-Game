@@ -20,6 +20,7 @@ export class AppComponent {
   toResetGame: boolean = true
   imageOne: string = "./assets/Red.jpg"
   imageTwo: string = "./assets/Blue.jpg"
+  audio: any = new Audio('./assets/sounds/music.mp3')
 
   onHandleGenRangerOne() {
     const ranger: IRanger = new RangerOne("Noubar", 100)
@@ -46,6 +47,7 @@ export class AppComponent {
     this.theWinner = "Press Stop Fight To See The Initial Result Or Wait For The Battle To Finish"
     this.isStarted = true
     this.toResetGame = true
+    this.audio.play()
     this?.rangerTwo?.startFight(5)
     this?.rangerOne?.startFight(4)
     this.timerID = setInterval(() => {
@@ -87,6 +89,7 @@ export class AppComponent {
     setTimeout(() => {
       this.isStarted = false
       this.toResetGame = false
+      this.audio.pause()
       this.startOrContinue = "Continue Fight"
       if (this.rangerOne && this.rangerTwo && this.rangerOne.power > this.rangerTwo?.power) {
         this.theWinner = "The Winner For Now Is: " + this?.rangerOne.name + " ! .. Press Continue Fight To Change The Result"
@@ -113,6 +116,7 @@ export class AppComponent {
       this.imageOne = "./assets/Red.jpg"
       this.imageTwo = "./assets/Blue.jpg"
       this.theWinner = "The Result Will Appear Here, Generate Players To Start"
+      this.audio = new Audio('./assets/sounds/music.mp3')
     }, 3000)
 
   }
