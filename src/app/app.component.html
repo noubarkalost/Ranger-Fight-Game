@@ -1,25 +1,27 @@
-
-  <div class="button-container">
-    <button class="button is-danger is-rounded " (click)="onHandleGenRangerOne()">Ranger One</button>
-    <button  class="button is-info is-rounded" (click)="onHandleGenRangerTwo()">Ranger Two</button>
-    <button class="button is-primary is-rounded "  [disabled]=" !(isGeneratedTwo && isGeneratedOne) || isStarted" (click)="onHandleStartFight()">{{startOrContinue}}</button>
-    <button class="button is-rounded is-warning"  [disabled]="!(isGeneratedTwo && isGeneratedOne) || !isStarted" (click)="onHandleStop()">Stop Fight</button>
-    <button class="button is-rounded is-black" [disabled]="toResetGame" (click)="onPlayAgain()">Reset Game</button>
-  </div>
+<div class="button-container">
+  <button class="button is-danger is-rounded " (click)="onHandleGenRangerOne()">Ranger One</button>
+  <button class="button is-info is-rounded" (click)="onHandleGenRangerTwo()">Ranger Two</button>
+  <button class="button is-primary is-rounded " [disabled]=" !(isGeneratedTwo && isGeneratedOne) || isStarted"
+          (click)="onHandleStartFight()">{{startOrContinue}}</button>
+  <button class="button is-rounded is-warning" [disabled]="!(isGeneratedTwo && isGeneratedOne) || !isStarted"
+          (click)="onHandleStop()">Stop Fight
+  </button>
+  <button class="button is-rounded is-black" [disabled]="toResetGame" (click)="onPlayAgain()">Reset Game</button>
+</div>
 
 
 <div class="container">
   <div class=" card-container">
 
-    <div class="message-header custom-message-header" *ngIf="rangerOne.power">
-      <p >{{rangerOne.name + "   " + rangerOne.power + "%"}}</p>
+    <div class="message-header custom-message-header">
+      <p>{{(rangerOne?.name || nameOfAnonymous) + "   " + (rangerOne?.power || 0) + "%"}}</p>
     </div>
 
-    <progress class="progress is-danger is-large"  value="0" [value]="rangerOne.power || 1" max="100">15%</progress>
+    <progress class="progress is-danger is-large" value="0" [value]="rangerOne?.power || 1" max="100">15%</progress>
     <div class="card-image">
       <figure class="image is-4by3">
 
-        <img src="./assets/Red.jpg"  alt="Player 1"/>
+        <img src="./assets/Red.jpg" alt="Player 1"/>
 
       </figure>
     </div>
@@ -27,15 +29,13 @@
   </div>
   <div class=" card-container">
     <div class="card-image">
-      <div class="message-header custom-message-header" *ngIf="rangerTwo.power">
-        <p >{{rangerTwo.name + "  " + rangerTwo.power  + "%"}}</p>
+      <div class="message-header custom-message-header">
+        <p>{{(rangerTwo?.name || nameOfAnonymous) + "  " + (rangerTwo?.power || 0) + "%"}}</p>
       </div>
 
-      <progress class="progress is-link is-large" value="0" [value]=" rangerTwo.power || 1" max="100">15%</progress>
+      <progress class="progress is-link is-large" value="0" [value]=" rangerTwo?.power || 1" max="100">15%</progress>
       <figure class="image is-4by3">
-
-        <img src="./assets/Blue.jpg"  alt="Player 2"/>
-
+        <img src="./assets/Blue.jpg" alt="Player 2"/>
       </figure>
     </div>
   </div>
@@ -43,12 +43,7 @@
 
 
 <div class="notification is-primary score">
-
-
-    <p><strong>{{theWinner}}</strong></p>
-
-
-
+  <p><strong>{{theWinner}}</strong></p>
 </div>
 
 

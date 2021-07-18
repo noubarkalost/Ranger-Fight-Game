@@ -1,22 +1,24 @@
 export interface IRanger {
-  name: string
-  power: number
+  name: string;
+  power: number;
+  printName: () => void
+  startFight: (num: number) => void;
+  onStop: (intervalId: number) => void;
 }
 
 export abstract class Ranger implements IRanger {
-  name : string = ''
+  name: string = ''
   abstract power: number = 0
-  intervalId: number | undefined;
 
   protected constructor(name: string) {
     this.name = name
   }
 
-  printName() :void{
+  printName(): void {
     console.log(this.name, this.power)
   }
 
-  startFight(num: number) : void{
+  startFight(num: number): void {
     let random = Math.floor(Math.random() * (num))
     this.power -= random
     if (Math.sign(this.power) === -1) {
@@ -24,28 +26,30 @@ export abstract class Ranger implements IRanger {
     }
   }
 
-  onStop(intervalId:number): void {
+  onStop(intervalId: number): void {
     setTimeout(() => {
       clearInterval(intervalId)
     }, 3000)
   }
 }
 
-export class RangerOne extends Ranger{
-    constructor(name:string,power: number) {
+export class RangerOne extends Ranger implements IRanger {
+  constructor(name: string, power: number) {
     super(name);
-      this.power = power
+    this.power = power
   }
- startFight(num: number) {
-   super.startFight(num || 20);
- }
+
+  startFight(num: number) {
+    super.startFight(num || 20);
+  }
 
   power: number;
 
 }
-export class RangerTwo extends RangerOne{
-  constructor(name: string,power: number = 100) {
-    super(name,power);
+
+export class RangerTwo extends RangerOne {
+  constructor(name: string, power: number = 100) {
+    super(name, power);
 
   }
 
