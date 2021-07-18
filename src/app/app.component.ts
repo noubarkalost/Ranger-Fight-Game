@@ -23,9 +23,7 @@ export class AppComponent {
   audio: any = new Audio('./assets/sounds/music.mp3')
 
   onHandleGenRangerOne() {
-    const ranger: IRanger = new RangerOne("Noubar", 100)
-    this.rangerOne = ranger
-    ranger.printName()
+    this.rangerOne = new RangerOne("Noubar", 100)
     this.isGeneratedOne = true
     if (this.isGeneratedOne && this.isGeneratedTwo) {
       this.theWinner = "The Result Will Appear Here, You Can Start The Combat"
@@ -33,9 +31,7 @@ export class AppComponent {
   }
 
   onHandleGenRangerTwo() {
-    const ranger = new RangerTwo("Sako", 100)
-    this.rangerTwo = ranger
-    ranger.printName()
+    this.rangerTwo = new RangerTwo("Sako", 100)
     this.isGeneratedTwo = true
     if (this.isGeneratedOne && this.isGeneratedTwo) {
       this.theWinner = "The Result Will Appear Here, You Can Start The Combat"
@@ -48,8 +44,6 @@ export class AppComponent {
     this.isStarted = true
     this.toResetGame = true
     this.audio.play()
-    this?.rangerTwo?.startFight(5)
-    this?.rangerOne?.startFight(4)
     this.timerID = setInterval(() => {
       this?.rangerTwo?.startFight(20)
       this?.rangerOne?.startFight(20)
