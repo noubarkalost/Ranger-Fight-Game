@@ -116,6 +116,7 @@ export class AppComponent {
       this.imageOne = "./assets/Red.jpg"
       this.imageTwo = "./assets/Blue.jpg"
       this.theWinner = "The Result Will Appear Here, Generate Players To Start"
+      this.audio.stop();
       this.audio = new Audio('./assets/sounds/music.mp3')
     }, 3000)
 
