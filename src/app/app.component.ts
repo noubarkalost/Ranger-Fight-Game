@@ -1,12 +1,15 @@
 import {Component} from '@angular/core';
 import {RangerOne, RangerTwo, IRanger} from "./Classes";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  countDownTrigger: boolean = false
+  counter: number = 3
   nameOfAnonymous: string = "No Player"
   awaitMessage: string = ""
   startOrContinue: string = "Start Fight"
@@ -28,6 +31,11 @@ export class AppComponent {
     if (this.isGeneratedOne && this.isGeneratedTwo) {
       this.theWinner = "The Result Will Appear Here, You Can Start The Combat"
     }
+    if (this.imageOne === "./assets/RedDead.gif") {
+      this.imageOne = "./assets/Red.jpg"
+    }
+
+
   }
 
   onHandleGenRangerTwo() {
@@ -36,7 +44,9 @@ export class AppComponent {
     if (this.isGeneratedOne && this.isGeneratedTwo) {
       this.theWinner = "The Result Will Appear Here, You Can Start The Combat"
     }
-
+    if (this.imageTwo === "./assets/BlueDead.gif") {
+      this.imageTwo = "./assets/Blue.jpg"
+    }
   }
 
   onHandleStartFight() {
@@ -52,7 +62,7 @@ export class AppComponent {
         this.toResetGame = false
         this.isStarted = false
         clearInterval(this.timerID)
-        this.theWinner = "The Winner Is: " + this?.rangerTwo?.name + " ! .. Please Generate Players To Play Again Or Reset The Game"
+        this.theWinner = "The Winner Is: " + this?.rangerTwo?.name + " ! .. Please Generate Players In Order To Play Again Or Reset The Game"
         this.isGeneratedTwo = false
         this.isGeneratedOne = false
         this.startOrContinue = "Start Fight"
@@ -60,13 +70,13 @@ export class AppComponent {
         this.imageTwo = "./assets/BlueDead.gif"
         this.isStarted = false
         this.toResetGame = false
-        this.theWinner = "The Winner Is: " + this.rangerOne.name + " ! .. Please Generate Players To Play Again Or Reset The Game"
+        this.theWinner = "The Winner Is: " + this.rangerOne.name + " ! .. Please Generate Players In Order To Play Again Or Reset The Game"
         this.isGeneratedTwo = false
         this.isGeneratedOne = false
         this.startOrContinue = "Start Fight"
         clearInterval(this.timerID)
       } else if (!this.rangerTwo.power && !this.rangerOne.power) {
-        this.theWinner = "The Winner For Now Is The Math )) .. Please Generate Players To Play Again Or Reset The Game"
+        this.theWinner = "The Winner For Now Is The Math )) .. Please Generate Players In Order To Play Again Or Reset The Game"
       }
 
     }, 1000)
@@ -74,13 +84,16 @@ export class AppComponent {
   }
 
   onHandleStop() {
-    this.awaitMessage = "Please Wait 3 Seconds For The Game To Stop In Order To See The Initial Result"
+    this.awaitMessage = "Please Wait 3 Seconds Until The Game Stops In Order To See The Initial Result"
     this.theWinner = this.awaitMessage
     this?.rangerOne?.onStop(this.timerID)
     this?.rangerTwo?.onStop(this.timerID)
-
+    this.countDownTrigger = true
+    this.counter = 3
+    this.countDown()
 
     setTimeout(() => {
+      this.countDownTrigger = false
       this.isStarted = false
       this.toResetGame = false
       this.audio.pause()
@@ -98,8 +111,11 @@ export class AppComponent {
   }
 
   onPlayAgain() {
-    this.awaitMessage = "Please Wait 3 Seconds For The Game To Reset In Order To Play Again"
+    this.awaitMessage = "Please Wait 3 Seconds Until The Game Gets Reset In Order To Play Again"
     this.theWinner = this.awaitMessage
+    this.countDownTrigger = true
+    this.counter = 3
+    this.countDown()
     setTimeout(() => {
       this.startOrContinue = "Start Fight"
       this.isStarted = false
@@ -112,7 +128,18 @@ export class AppComponent {
       this.theWinner = "The Result Will Appear Here, Generate Players To Start"
       this.audio.pause()
       this.audio.currentTime = 0;
+      this.countDownTrigger = false
+
     }, 3000)
+
+  }
+  countDown(){
+    let counterId = setInterval(()=>{
+        this.counter = this.counter - 1
+      if (this.counter === 0) {
+        clearInterval(counterId);
+      }
+    }, 1000)
 
   }
 
