@@ -8,6 +8,7 @@ import {RangerOne, RangerTwo, IRanger} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  stopOrReset : string = ""
   countDownTrigger: boolean = false
   counter: number = 3
   nameOfAnonymous: string = "No Player"
@@ -91,12 +92,14 @@ export class AppComponent {
     this.countDownTrigger = true
     this.counter = 3
     this.countDown()
+    this.stopOrReset = " Stops: "
 
     setTimeout(() => {
       this.countDownTrigger = false
       this.isStarted = false
       this.toResetGame = false
       this.audio.pause()
+
       this.startOrContinue = "Continue Fight"
       if (this.rangerOne && this.rangerTwo && this.rangerOne.power > this.rangerTwo?.power) {
         this.theWinner = "The Winner For Now Is: " + this?.rangerOne.name + " ! .. Press Continue Fight To Change The Result"
@@ -115,6 +118,8 @@ export class AppComponent {
     this.theWinner = this.awaitMessage
     this.countDownTrigger = true
     this.counter = 3
+    this.stopOrReset = " Resets: "
+
     this.countDown()
     setTimeout(() => {
       this.startOrContinue = "Start Fight"
@@ -129,6 +134,7 @@ export class AppComponent {
       this.audio.pause()
       this.audio.currentTime = 0;
       this.countDownTrigger = false
+      this.toResetGame = true
 
     }, 3000)
 
