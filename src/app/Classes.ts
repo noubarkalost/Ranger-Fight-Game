@@ -1,60 +1,63 @@
 export interface IRanger {
   name: string;
   power: number;
-  startFight: (num: number) => void;
+  startFight: (num?: number) => void;
   onStop: (intervalId: number) => void;
 }
 
 export abstract class Ranger implements IRanger {
   name: string = ''
-  abstract power: number
+  power: number
 
-  protected constructor(name: string) {
+
+  protected constructor(name: string, power: number) {
     this.name = name
+    this.power = power
+
   }
 
 
-  startFight(num: number): void {
-    let random = Math.floor(Math.random() * (num))
+  startFight(): void {
+    let random = Math.floor(Math.random() * (20))
     this.power -= random
     if (Math.sign(this.power) === -1) {
       this.power = 0
     }
   }
 
-  onStop(intervalId: number): void {
-
-  }
-}
-
-export class RangerOne extends Ranger implements IRanger {
-  constructor(name: string, power: number) {
-    super(name);
-    this.power = power
-  }
-
-
-   private printName(): void {
+  private printName(): void {
     console.log(this.name, this.power)
   }
-  startFight(num: number) {
-    super.startFight(num || 20);
+
+  onStop(intervalId: number): void {
     this.printName()
-  }
-  onStop(intervalId: number) {
     setTimeout(() => {
       clearInterval(intervalId)
     }, 3000)
   }
 
-  power: number;
-
 }
 
-export class RangerTwo extends RangerOne {
-  constructor(name: string, power: number = 100) {
-    super(name, power);
 
+export class RangerOne extends Ranger implements IRanger {
+  constructor(name: string, power: number) {
+    super(name, power);
+    this.power = power
+    this.name = name
+  }
+
+  startFight(num?: number): void {
+    if (num === undefined) {
+      super.startFight()
+    } else {
+      let random = Math.floor(Math.random() * (20))
+      this.power -= random
+      if (Math.sign(this.power) === -1) {
+        this.power = 0
+
+      }
+
+    }
   }
 
 }

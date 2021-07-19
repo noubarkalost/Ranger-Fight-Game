@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {RangerOne, RangerTwo, IRanger} from "./Classes";
+import {RangerOne, IRanger} from "./Classes";
 
 
 @Component({
@@ -8,7 +8,7 @@ import {RangerOne, RangerTwo, IRanger} from "./Classes";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  stopOrReset : string = ""
+  stopOrReset: string = ""
   countDownTrigger: boolean = false
   counter: number = 3
   nameOfAnonymous: string = "No Player"
@@ -16,7 +16,7 @@ export class AppComponent {
   startOrContinue: string = "Start Fight"
   theWinner: string = "The Result Will Appear Here, Generate Players To Start"
   rangerOne ?: IRanger | undefined = undefined;
-  rangerTwo: IRanger | undefined = undefined;
+  rangerTwo?: IRanger | undefined = undefined;
   timerID: number = 0
   isStarted: boolean = false
   isGeneratedOne: boolean = false
@@ -40,7 +40,7 @@ export class AppComponent {
   }
 
   onHandleGenRangerTwo() {
-    this.rangerTwo = new RangerTwo("Sako", 100)
+    this.rangerTwo = new RangerOne("Sako", 100,)
     this.isGeneratedTwo = true
     if (this.isGeneratedOne && this.isGeneratedTwo) {
       this.theWinner = "The Result Will Appear Here, You Can Start The Combat"
@@ -57,7 +57,7 @@ export class AppComponent {
     this.audio.play()
     this.timerID = setInterval(() => {
       this?.rangerTwo?.startFight(20)
-      this?.rangerOne?.startFight(20)
+      this?.rangerOne?.startFight()
       if (!this?.rangerOne?.power) {
         this.imageOne = "./assets/RedDead.gif"
         this.toResetGame = false
@@ -139,9 +139,10 @@ export class AppComponent {
     }, 3000)
 
   }
-  countDown(){
-    let counterId = setInterval(()=>{
-        this.counter = this.counter - 1
+
+  countDown() {
+    let counterId = setInterval(() => {
+      this.counter = this.counter - 1
       if (this.counter === 0) {
         clearInterval(counterId);
       }
