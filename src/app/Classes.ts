@@ -6,8 +6,8 @@ export interface IRanger {
 }
 
 export abstract class Ranger implements IRanger {
-  name: string = ''
-  power: number
+  name: string = "Anonymous Ranger"
+  power: number = 90
 
 
   protected constructor(name: string, power: number) {
